@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.m": "matlab",
+        "*.tex": "latex",
+        "DA-AD.C": "cpp",
+        "xtree": "cpp"
+    }
+}
