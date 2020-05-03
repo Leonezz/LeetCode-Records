@@ -22,26 +22,24 @@ class Solution
 public:
     int lengthOfLongestSubstring(string s)
     {
-        string list;
-        int max_length = 0;
-        for (int i = 0; i < s.size(); ++i)
+        char table[128] = {0};
+        int left = 0;
+        int right = 0;
+        int maxLength = 0;
+        while (right < s.size())
         {
-            const char &ch = s[i];
-            if (list.find(ch) != list.npos)
+            char &ch = s[right];
+            table[ch]++;
+
+            while (table[ch] > 1)
             {
-                if (list.size() > max_length)
-                {
-                    max_length = list.size();
-                }
-                list = list.substr(list.find(ch) + 1);
+                table[s[left]]--;
+                left++; 
             }
-            list += ch;
+            maxLength = maxLength > right - left + 1 ? maxLength : right - left + 1;
+            right++;
         }
-        if (list.size() > max_length)
-        {
-            max_length = list.size();
-        }
-        return max_length;
+        return maxLength;
     }
 };
 // @lc code=end
