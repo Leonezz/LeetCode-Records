@@ -41,38 +41,21 @@ public:
             return vector<vector<int>>();
         queue<TreeNode *> queue;
         queue.push(root);
-        int curLevelNodesCnt = 1;
-        int nextLevelNodesCut = 0;
-        vector<vector<int>> result(1, vector<int>());
+        vector<vector<int>> ans;
         while (!queue.empty())
         {
-            TreeNode *cur = queue.front();
-            queue.pop();
-            if (curLevelNodesCnt == 0)
-            {
-                vector<int> vec;
-                vec.push_back(cur->val);
-                result.push_back(vec);
-                curLevelNodesCnt = nextLevelNodesCut - 1;
-                nextLevelNodesCut = 0;
+            int size = queue.size();
+            vector<int> level;
+            while(size--){
+                TreeNode* cur = queue.front();
+                queue.pop();
+                level.push_back(cur->val);
+                if(cur->left)queue.push(cur->left);
+                if(cur->right)queue.push(cur->right);
             }
-            else
-            {
-                result.back().push_back(cur->val);
-                curLevelNodesCnt--;
-            }
-            if (cur->left)
-            {
-                queue.push(cur->left);
-                nextLevelNodesCut++;
-            }
-            if (cur->right)
-            {
-                queue.push(cur->right);
-                nextLevelNodesCut++;
-            }
+            ans.push_back(level);
         }
-        return result;
+        return ans;
     }
 };
 // @lc code=end
