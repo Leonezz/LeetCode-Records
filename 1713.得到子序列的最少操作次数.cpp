@@ -47,6 +47,7 @@ public:
     }
 };
 // @lc code=end
+#include<algorithm>
 
 int main()
 {
